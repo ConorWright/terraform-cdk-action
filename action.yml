@@ -42,3 +42,6 @@ inputs:
     description: Whether to update the last comment on the PR rather than adding a new comment
     default: "true"
     required: false
+  args:
+    description: Optional arguments to pass to cdktf-cli
+    required: false

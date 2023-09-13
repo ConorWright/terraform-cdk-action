@@ -91,8 +91,8 @@ const inputs = {
   args: {
     description: "Optional arguments to pass to cdktf-cli",
     required: false,
-    type: "string"
-  }
+    type: "string",
+  },
 };
 
 const repoName = "terraform-cdk-action";

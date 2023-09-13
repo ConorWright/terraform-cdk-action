@@ -40,6 +40,7 @@ describe("comment", () => {
     githubToken: "xxx",
     commentOnPr: true,
     updateComment: true,
+    args: "some-optional-argument",
   };
 
   const pullRequestData = {
