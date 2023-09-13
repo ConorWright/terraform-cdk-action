@@ -126,6 +126,7 @@ export async function run(): Promise<void> {
     githubToken: input.githubToken,
     commentOnPr: input.commentOnPr,
     updateComment: input.updateComment,
+    args: input.args,
   };
   const octokit = github.getOctokit(inputs.githubToken);
   const commentController = new CommentController({
@@ -204,8 +205,15 @@ export async function run(): Promise<void> {
           `Stack name must be provided when running in 'auto-approve-apply' mode`
         );
       }
+
+      let applyCommand = `cdktf apply ${inputs.stackName} --auto-approve`;
+
+      if (inputs.args) {
+        applyCommand = `${applyCommand} ${inputs.args}`;
+      }
+
       await execute(
-        `cdktf apply ${inputs.stackName} --auto-approve`,
+        applyCommand,
         inputs,
         (output, runUrl) =>
           hasTerraformChanges(output)
@@ -240,8 +248,15 @@ export async function run(): Promise<void> {
           `Stack name must be provided when running in 'auto-approve-destroy' mode`
         );
       }
+
+      let destroyCommand = `cdktf apply ${inputs.stackName} --auto-approve`;
+
+      if (inputs.args) {
+        applyCommand = `${destroyCommand} ${inputs.args}`;
+      }
+
       await execute(
-        `cdktf destroy ${inputs.stackName} --auto-approve`,
+        destroyCommand,
         inputs,
         () =>
           postComment(
